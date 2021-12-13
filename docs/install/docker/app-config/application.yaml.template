@@ -1,0 +1,11 @@
+spring:
+  main:
+    web-application-type: none
+
+cloudflare-api:
+  - email: <email-id>
+    authkey: <key>
+
+hostnames:
+  - hostname1
+  - hostname2
