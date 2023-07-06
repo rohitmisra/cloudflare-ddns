@@ -1,0 +1,8 @@
+service:
+  boot: false
+  docker:
+    name: rohitmisra44/cloudflare-ddns
+    tag:  latest
+
+ingress:
+  host: localhost

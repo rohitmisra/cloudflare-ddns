@@ -2,13 +2,13 @@ package de.rohitmisra.cloudflareddns.component
 
 import de.rohitmisra.cloudflareddns.model.dns.DnsRecord
 import de.rohitmisra.cloudflareddns.model.zone.ZoneRecord
+import jakarta.annotation.PostConstruct
 import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.scheduling.annotation.EnableScheduling
 import org.springframework.scheduling.annotation.Scheduled
 import org.springframework.stereotype.Component
 import java.util.stream.Collectors
-import javax.annotation.PostConstruct
 
 @Component
 @EnableScheduling

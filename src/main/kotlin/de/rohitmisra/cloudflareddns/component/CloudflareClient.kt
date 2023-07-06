@@ -13,16 +13,19 @@ import de.rohitmisra.cloudflareddns.model.dns.DnsUpdateRequest
 import de.rohitmisra.cloudflareddns.model.zone.ZoneRecord
 import de.rohitmisra.cloudflareddns.model.zone.ZoneResponse
 import org.slf4j.LoggerFactory
+import org.springframework.beans.factory.annotation.Value
 import org.springframework.stereotype.Component
 
 @Component
-class CloudflareClient {
+class CloudflareClient(
+    private val webClient: OkHttpClient,
+    private val objectMapper: ObjectMapper,
+    @Value("\${checkIpUrl}")
+    private val checkIpUrl: String
+) {
 
-    private val log = LoggerFactory.getLogger(CloudflareClient::class.java)
-    private val webClient = OkHttpClient()
-    private val objectMapper = ObjectMapper().registerModule(KotlinModule())
     private val mediaTypeApplicationJson = MediaType.parse("application/json")
-
+    private val log = LoggerFactory.getLogger(CloudflareClient::class.java)
     fun getZone(email: String, auth: String): ZoneRecord {
         val request = Request.Builder().url("https://api.cloudflare.com/client/v4/zones/")
             .addHeader("X-Auth-Email", email)

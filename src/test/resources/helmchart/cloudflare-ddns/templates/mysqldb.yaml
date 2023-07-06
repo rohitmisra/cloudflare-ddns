@@ -1,0 +1,43 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: mysqldb
+spec:
+  type: NodePort
+  ports:
+    - port: 3306
+      name: mysqldb
+      targetPort: 3306
+  selector:
+    app: mysqldb
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mysqldb
+spec:
+  selector:
+    matchLabels:
+      app: mysqldb
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: mysqldb
+    spec:
+      containers:
+        - image: mysql:latest
+          name: mysqldb
+          env:
+            - name: MYSQL_ROOT_PASSWORD
+              value: "my-secret-pass"
+            - name: MYSQL_DATABASE
+              value: "cloudflare-ddns"
+            - name: MYSQL_USER
+              value: "user"
+            - name: MYSQL_PASSWORD
+              value: "pa55word!"
+          ports:
+            - containerPort: 3306
+              name: mysqldb
