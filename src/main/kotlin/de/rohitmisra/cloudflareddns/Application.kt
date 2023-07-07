@@ -11,10 +11,4 @@ import org.springframework.context.annotation.Bean
 class Application
 fun main(args: Array<String>) {
     runApplication<Application>(*args)
-
-    @Bean
-    fun okHttpClient(): OkHttpClient = OkHttpClient()
-
-    @Bean
-    fun objectMapper(): ObjectMapper = ObjectMapper().registerModule(KotlinModule())
 }

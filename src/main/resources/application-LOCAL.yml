@@ -1,0 +1,5 @@
+spring:
+  datasource:
+    url: jdbc:mysql://192.168.178.101:3307/cloudflare-ddns
+    username: user
+    password: pa55word!

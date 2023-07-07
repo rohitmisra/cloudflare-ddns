@@ -20,8 +20,6 @@ import org.springframework.stereotype.Component
 class CloudflareClient(
     private val webClient: OkHttpClient,
     private val objectMapper: ObjectMapper,
-    @Value("\${checkIpUrl}")
-    private val checkIpUrl: String
 ) {
 
     private val mediaTypeApplicationJson = MediaType.parse("application/json")

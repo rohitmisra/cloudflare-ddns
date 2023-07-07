@@ -5,6 +5,7 @@ import de.rohitmisra.cloudflareddns.model.zone.ZoneRecord
 import jakarta.annotation.PostConstruct
 import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.beans.factory.annotation.Value
 import org.springframework.scheduling.annotation.EnableScheduling
 import org.springframework.scheduling.annotation.Scheduled
 import org.springframework.stereotype.Component
@@ -14,9 +15,13 @@ import java.util.stream.Collectors
 @EnableScheduling
 class CloudflareService(
     @Autowired private val cloudflareClient: CloudflareClient,
-    @Autowired private val apiConfigProperties: ApiConfigProperties,
-    @Autowired private val ddnsConfigProperties: DdnsConfigProperties,
-    @Autowired private val ipAddressClient: IpAddressClient
+    @Autowired private val ipAddressClient: IpAddressClient,
+    @Value("#{'\${cloudflare.hostnames:}'.split(',')}")
+    private val hostnames: List<String>,
+    @Value("\${cloudflare.credentials.email}")
+    private val cloudflareEmail: String,
+    @Value("\${cloudflare.credentials.authkey}")
+    private val cloudflareAuthKey: String,
 ) {
     private val log = LoggerFactory.getLogger(this::class.java)
 
@@ -27,12 +32,12 @@ class CloudflareService(
 
     @PostConstruct
     fun setup() {
-        email = apiConfigProperties.credentials["email"]!!
-        auth = apiConfigProperties.credentials["authkey"]!!
-        hostnameList.addAll(ddnsConfigProperties.hostnames)
+        email = cloudflareEmail
+        auth = cloudflareAuthKey
+        hostnameList.addAll(hostnames)
     }
 
-    @Scheduled(fixedDelay = 10 * 1_000L)
+    //@Scheduled(fixedDelay = 10 * 1_000L)
     fun scheduleFixedDelayTask() {
         log.info("Running cron job")
         log.info("Getting zone Id for $email")

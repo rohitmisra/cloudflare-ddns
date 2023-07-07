@@ -6,8 +6,6 @@ plugins {
 	kotlin("jvm") version "1.8.22"
 	kotlin("plugin.spring") version "1.8.22"
 	`maven-publish`
-	id("org.jetbrains.gradle.docker") version "1.6.0-RC.5"
-	id("org.flywaydb.flyway")  version "6.4.3"
 }
 
 group = "de.rohitmisra"
@@ -23,6 +21,7 @@ repositories {
 
 dependencies {
 	implementation("org.springframework.boot:spring-boot-starter-web")
+	implementation("org.springframework.boot:spring-boot-starter-data-jpa")
 	implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
 	implementation("org.jetbrains.kotlin:kotlin-reflect")
 	implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
@@ -30,7 +29,10 @@ dependencies {
 	implementation(kotlin("script-runtime"))
 	implementation("com.squareup.okhttp:okhttp:2.7.5")
 	implementation ("com.fasterxml.jackson.module:jackson-module-kotlin:2.12.3")
-	implementation("se.transmode.gradle:gradle-docker:1.2")
+	implementation("mysql:mysql-connector-java:8.0.33")
+	implementation("org.flywaydb:flyway-core:9.8.1")
+	implementation("org.flywaydb:flyway-mysql:9.8.1")
+
 }
 
 tasks.withType<KotlinCompile> {

@@ -1,0 +1,21 @@
+context:
+  initializer:
+    classes: de.rohitmisra.cloudflareddns.config.BeansConfig
+checkip:
+  url:
+spring:
+  datasource:
+    driverClassName: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://192.168.178.101:3307/cloudflare-ddns
+    username: user
+    password: pa55word!
+  flyway:
+    locations: "classpath:db/migration"
+cloudflare:
+  hostnames: heimdall, homelab, drone
+  credentials:
+    email: rohitmisra.44@gmail.com
+    authkey: XXXX
+logging:
+  level:
+    root: info

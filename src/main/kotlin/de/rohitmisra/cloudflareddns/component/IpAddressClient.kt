@@ -11,8 +11,8 @@ import org.springframework.stereotype.Component
 @Component
 class IpAddressClient(
     private val webClient: OkHttpClient,
-    @Value("\${checkIpUrl}")
-    private val checkIpUrl: String //https://checkip.amazonaws.com/
+    @Value("\${checkip.url}")
+    private val checkIpUrl: String
 
 ){
     fun getIpv4(): String {
