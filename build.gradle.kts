@@ -8,6 +8,14 @@ plugins {
 	`maven-publish`
 }
 
+buildscript {
+	dependencies {
+		classpath("org.jetbrains.kotlin:kotlin-noarg:1.8.22")
+	}
+}
+
+apply (plugin = "kotlin-jpa")
+
 group = "de.rohitmisra"
 version = "1.0-SNAPSHOT"
 
@@ -23,6 +31,7 @@ dependencies {
 	implementation("org.springframework.boot:spring-boot-starter-web")
 	implementation("org.springframework.boot:spring-boot-starter-data-jpa")
 	implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
+	implementation("com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.15.2")
 	implementation("org.jetbrains.kotlin:kotlin-reflect")
 	implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
